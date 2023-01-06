@@ -16,7 +16,8 @@
     "express": "^4.18.2",
     "mongodb": "^4.13.0",
     "mysql2": "^2.3.3",
-    "parser": "^0.1.4"
+    "parser": "^0.1.4",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"

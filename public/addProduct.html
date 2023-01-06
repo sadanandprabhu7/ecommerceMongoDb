@@ -4,10 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Orders</title>
-    <script src="ordersPage.js" defer></script>
+    <title>Add Product</title>
+    <script src="addProduct.js" defer></script>
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="my-css.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.0/axios.min.js"></script>
+    <script src="addProduct.js"></script>
   </head>
   <body>
     <header class="main-header">
@@ -22,15 +24,26 @@
       </nav>
       <h1 class="band-name band-name-large">The Generics</h1>
     </header>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.0/axios.min.js"></script>
-    <table id="mytable">
-      <tr>
-        <th>TITLE</th>
-        <th>PRICE</th>
-        <th>QUANTITY</th>
-        <th>ORDER ID</th>
-      </tr>
-    </table>
+    <div>
+      <form onsubmit="saveProduct(event)">
+        <table>
+          <tr>
+            <td>
+              <input type="text" name="title" placeholder="Title of Product" />
+            </td>
+          </tr>
+          <tr>
+            <td><input type="text" name="image" placeholder="Images Url" /></td>
+          </tr>
+          <tr>
+            <td><input type="number" name="price" placeholder="Price" /></td>
+          </tr>
+          <tr>
+            <td><button>submit</button></td>
+          </tr>
+        </table>
+      </form>
+    </div>
     <footer class="main-footer">
       <div class="container main-footer-container">
         <h3 class="band-name">The Generics</h3>

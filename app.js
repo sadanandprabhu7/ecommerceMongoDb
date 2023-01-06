@@ -2,10 +2,12 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
-const mongoConnect = require("./util/database");
+const mongoConnect = require("./util/database").mongoConnect;
 const env = require("dotenv");
 const path = require("path");
 //const shopProducts = require("./routes/main");
+
+const adminRoutes = require("./routes/admin");
 
 const app = express();
 
@@ -24,15 +26,15 @@ app.use((req, res, next) => {
   //   .catch((err) => {
   //     console.log(err);
   //   });
+  next();
 });
 
-//app.use(shopProducts);
+app.use(adminRoutes);
 
 //to deploye front end
 // app.use((req, res) => {
 //   res.sendFile(path.join(__dirname, `public/${req.url}`));
 // });
-mongoConnect((client) => {
-  //console.log(client);
+mongoConnect(() => {
   app.listen(3000);
 });

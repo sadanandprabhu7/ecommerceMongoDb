@@ -43,11 +43,13 @@ body {
   text-align: center;
   font-size: 1.1em;
   font-weight: lighter;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(0, 0, 0, 0.6);
+  /* border-bottom: 1px solid rgba(255, 255, 255, 0.3); */
 }
 
 .main-nav li {
-  padding: 0 5%;
+  /* padding: 0 5%; */
+  padding: 0 1%;
 }
 
 .nav a:hover {
@@ -56,10 +58,10 @@ body {
 
 .main-header {
   background-color: rgba(0, 0, 0, 0.6);
-  background-image: url("Images/Header Background.jpg");
+  /* background-image: url("Images/Header Background.jpg"); */
   background-blend-mode: multiply;
   background-size: cover;
-  padding-bottom: 30px;
+  /* padding-bottom: 30px; */
 }
 
 .band-name {
@@ -76,6 +78,7 @@ body {
 }
 
 .content-section {
+  min-height: 500px;
   margin: 1em;
 }
 
@@ -85,9 +88,10 @@ body {
   padding: 0 1.5em;
 }
 .section-header {
-  font-family: "Metal Mania";
+  /* font-family: "Metal Mania"; */
   font-weight: normal;
-  color: #333;
+  color: rgba(0, 0, 0, 0.6);
+  /* color: #333; */
   text-align: center;
   font-size: 2.5em;
 }
@@ -101,7 +105,8 @@ body {
 }
 
 .main-footer {
-  background-color: #56ccf2;
+  /* background-color: #56ccf2; */
+  background-color: rgba(0, 0, 0, 0.6);
   color: white;
   padding: 0.25em 0;
 }

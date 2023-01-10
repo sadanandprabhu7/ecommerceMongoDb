@@ -26,9 +26,10 @@
     </header>
     <section class="content-section container">
       <h2 class="section-header">ADD PRODUCTS</h2>
-      <div>
+      <div class="shop-items">
         <form onsubmit="saveProduct(event)">
           <table>
+            <th>TITLE</th>
             <tr>
               <td>
                 <input
@@ -38,16 +39,20 @@
                 />
               </td>
             </tr>
+            <th>IMAGE URL</th>
             <tr>
               <td>
                 <input type="text" name="image" placeholder="Images Url" />
               </td>
             </tr>
+            <th>PRICE</th>
             <tr>
               <td><input type="number" name="price" placeholder="Price" /></td>
             </tr>
             <tr>
-              <td><button>submit</button></td>
+              <td>
+                <button id="createBtn" class="btn btn-edit">submit</button>
+              </td>
             </tr>
           </table>
         </form>

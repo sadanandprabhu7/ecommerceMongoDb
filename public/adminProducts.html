@@ -28,37 +28,53 @@
       <h2 class="section-header">ADMIN PRODUCTS</h2>
       <div class="shop-items"></div>
     </section>
-    <section id="updateProduct">
-      <table>
-        <tr>
-          <td>
-            <input
-              type="text"
-              id="pTitle"
-              name="title"
-              placeholder="Title of Product"
-            />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input
-              type="text"
-              id="pImage"
-              name="image"
-              placeholder="Images Url"
-            />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input type="number" id="pPrice" name="price" placeholder="Price" />
-          </td>
-        </tr>
-        <tr>
-          <td><button id="updateBtn">Upadte Product</button></td>
-        </tr>
-      </table>
+    <section id="updateProduct" class="content-section container">
+      <h2 class="section-header">UPDATE PRODUCT</h2>
+      <div class="shop-items">
+        <table>
+          <th>TITLE</th>
+          <tr>
+            <td>
+              <input
+                type="text"
+                id="pTitle"
+                name="title"
+                placeholder="Title of Product"
+              />
+            </td>
+          </tr>
+          <th>IMAGE URL</th>
+          <tr>
+            <td>
+              <input
+                type="text"
+                id="pImage"
+                name="image"
+                placeholder="Images Url"
+              />
+            </td>
+          </tr>
+          <th>PRICE</th>
+          <tr>
+            <td>
+              <input
+                type="number"
+                id="pPrice"
+                name="price"
+                placeholder="Price"
+              />
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <button id="updateBtn" class="btn btn-edit">
+                Update Product
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
     </section>
     <footer class="main-footer">
       <div class="container main-footer-container">

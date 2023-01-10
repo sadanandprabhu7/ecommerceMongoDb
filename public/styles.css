@@ -303,7 +303,10 @@ body {
 .btn-edit:hover {
   background-color: #abdd82;
 }
-
+#updateBtn,
+#createBtn {
+  width: 161px;
+}
 .btn-danger {
   color: white;
   background-color: #eb5757;

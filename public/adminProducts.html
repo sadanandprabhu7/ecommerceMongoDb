@@ -26,32 +26,39 @@
     </header>
     <section class="content-section container">
       <h2 class="section-header">ADMIN PRODUCTS</h2>
-      <div>
-        <form onsubmit="saveProduct(event)">
-          <table>
-            <tr>
-              <td>
-                <input
-                  type="text"
-                  name="title"
-                  placeholder="Title of Product"
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <input type="text" name="image" placeholder="Images Url" />
-              </td>
-            </tr>
-            <tr>
-              <td><input type="number" name="price" placeholder="Price" /></td>
-            </tr>
-            <tr>
-              <td><button>submit</button></td>
-            </tr>
-          </table>
-        </form>
-      </div>
+      <div class="shop-items"></div>
+    </section>
+    <section id="updateProduct">
+      <table>
+        <tr>
+          <td>
+            <input
+              type="text"
+              id="pTitle"
+              name="title"
+              placeholder="Title of Product"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input
+              type="text"
+              id="pImage"
+              name="image"
+              placeholder="Images Url"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="number" id="pPrice" name="price" placeholder="Price" />
+          </td>
+        </tr>
+        <tr>
+          <td><button id="updateBtn">Upadte Product</button></td>
+        </tr>
+      </table>
     </section>
     <footer class="main-footer">
       <div class="container main-footer-container">

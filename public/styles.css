@@ -225,7 +225,9 @@ body {
 }
 
 .shop-item-image {
-  height: 250px;
+  width: 200px;
+  height: 200px;
+  /* height: 250px; */
 }
 
 .shop-item-details {
@@ -288,6 +290,18 @@ body {
   width: 75px;
   height: auto;
   border-radius: 10px;
+}
+
+.btn-edit {
+  color: white;
+  background-color: #66cc77;
+  border: none;
+  border-radius: 0.3em;
+  font-weight: bold;
+}
+
+.btn-edit:hover {
+  background-color: #abdd82;
 }
 
 .btn-danger {

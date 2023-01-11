@@ -56,3 +56,15 @@ exports.deleteFromCart = (req, res) => {
     res.status(200).json({ msg: "successfully removed from cart" });
   });
 };
+
+exports.postOrder = (req, res) => {
+  req.user.addOrder().then((result) => {
+    res.status(200).json({ msg: "successfully Placed " });
+  });
+};
+
+exports.getOrders = async (req, res) => {
+  req.user.getOrders().then((products) => {
+    res.json({ data: products });
+  });
+};

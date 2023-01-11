@@ -79,7 +79,7 @@ td {
   width: 50px;
 }
 table {
-  border-spacing: 10px;
+  border-spacing: 20px;
 }
 
 #pagination {
@@ -95,7 +95,9 @@ table {
   background: #56ccf2;
   margin: 1rem;
 }
-
+#orderBtn {
+  margin-left: 380px;
+}
 /* .pagination a:hover,
 .pagination a:active {
   background: #56ccf2;

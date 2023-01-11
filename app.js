@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const mongoConnect = require("./util/database").mongoConnect;
 const env = require("dotenv");
 const path = require("path");
-const shopProducts = require("./routes/main");
+const shopProducts = require("./routes/shop");
 const adminRoutes = require("./routes/admin");
 
 const User = require("./models/user");

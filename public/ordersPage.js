@@ -1,35 +1,28 @@
 window.addEventListener("DOMContentLoaded", () => {
   axios
-    .get("http://localhost:3000/orderDetails")
+    .get("http://localhost:3000/getOrders")
     .then((res) => {
-      console.log(res.data);
       res.data.data.forEach((order) => {
-        console.log(order.id);
-        order.products.forEach((product) => {
-          console.log(product);
-          const parent = document.getElementById("mytable");
-          const newItem = `<tr>
+        const parent = document.getElementById("mytable");
+        const newItem = `<tr>
             <td>
               <img
                 class="cart-item-image"
-                src="${product.image}"
+                src="${order.items[0].image}"
                 width="100"
                 height="100"
-              />
-              <span>${product.title}</span>
+              /> 
             </td>
-            <td><span>$${product.price}</span></td>
+            <td> <span>${order.items[0].title}</span></td>
+            <td><span>$${order.items[0].price}</span></td>
             <td>
-              <label>${product.orderItem.quantity}</label>
-            
+              <label>${order.items[0].quantity}</label>
             </td>
             <td>
-              <label>${order.id}</label>
-            
+              <label>${order._id}</label>S
             </td>
           </tr>`;
-          parent.innerHTML += newItem;
-        });
+        parent.innerHTML += newItem;
       });
     })
     .catch((err) => console.log(err));

@@ -2,6 +2,11 @@ window.addEventListener("DOMContentLoaded", () => {
   const parentDiv = document.getElementsByClassName("shop-items")[0];
   parentDiv.innerHTML = "";
   axios.get("http://localhost:3000/getCart").then((res) => {
+    if (res.data.data.length > 0) {
+      document.getElementById("orderBtn").style.visibility = "visible";
+    } else {
+      document.getElementById("orderBtn").style.visibility = "hidden";
+    }
     res.data.data.forEach((product) => {
       const itemsDiv = `<div class="shop-item" id="${product._id}">
                     <span class="shop-item-title">${product.title}</span>
@@ -25,3 +30,13 @@ async function deleteFromCart(id) {
     document.getElementById(id).remove();
   }
 }
+
+const orderBtn = document.getElementById("orderBtn");
+
+orderBtn.addEventListener("click", async () => {
+  const res = await axios.post(`http://localhost:3000/postOrder`);
+  if (res.status == 200) {
+    alert(`${res.data.msg}`);
+    window.location.href = "ordersPage.html";
+  }
+});

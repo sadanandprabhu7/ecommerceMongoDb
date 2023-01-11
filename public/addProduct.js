@@ -14,6 +14,9 @@ function saveProduct(event) {
     .post("http://localhost:3000/addProduct", obj)
     .then((res) => {
       alert(`${res.data.msg}`);
+      event.target.title.value = "";
+      event.target.image.value = "";
+      event.target.price.value = "";
     })
     .catch((err) => {
       console.log(err);

@@ -1,16 +1,3 @@
-const open = document.getElementById("open");
-const close = document.getElementById("close");
-
-const container = document.getElementById("conatiner");
-
-// open.addEventListener("click", () => {
-//   container.classList.add("active");
-// });
-
-// close.addEventListener("click", () => {
-//   container.classList.remove("active");
-// });
-
 // LOADING ALL THE PRODUCT ON SITE FROM DATABASE WHENEVR SITE IS VISITED
 
 const parentDiv = document.getElementsByClassName("shop-items")[0];
@@ -99,69 +86,14 @@ function addToCart(product) {
   axios
     .post("http://localhost:3000/postCart", { productId: product })
     .then((res) => {
-      console.log(res);
       if (res.status == 200) {
-        // CreateNotification(res.data.message);
-        // console.log(res.data.message);
+        alert(`${res.data.msg}`);
       }
     })
     .catch((err) => {
       console.log(err);
     });
 }
-
-function CreateNotification(message) {
-  const notif = document.createElement("div");
-  notif.classList.add("toast");
-  notif.innerText = message;
-  notificationContainer.appendChild(notif);
-
-  setTimeout(() => {
-    notif.remove();
-  }, 3000);
-}
-
-// SHOWING DETAILS OF CART
-
-const showCart = document.getElementById("open");
-
-showCart.addEventListener("click", () => {
-  const parentTd = document.getElementById("table");
-  parentTd.innerHTML = "";
-  axios
-
-    .get("http://localhost:3000/items")
-    .then((res) => {
-      res.data.products.forEach((product) => {
-        const newItem = `  <tr>
-            <th>TITLLE</th>
-            <th>PRICE</th>
-            <th>QUANTITY</th>
-          </tr>
-        <tr>
-            <td>
-              <img
-                class="cart-item-image"
-                src="${product.image}"
-                width="100"
-                height="100"
-                
-              />
-              <span>${product.title}</span>
-            </td>
-            <td><span>$${product.price}</span></td>
-            <td>
-              <input type="number" value="${product.cartItem.quantity}" />
-              
-              <button type="button">REMOVE</button>
-            </td>`;
-        parentTd.innerHTML += newItem;
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
 
 const submit = document.getElementById("submitCart");
 

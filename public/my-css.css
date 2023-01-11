@@ -75,6 +75,9 @@ td {
   border: 1px solid black;
 }
 */
+#quantityInput {
+  width: 50px;
+}
 table {
   border-spacing: 10px;
 }

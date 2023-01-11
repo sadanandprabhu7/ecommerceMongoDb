@@ -40,6 +40,19 @@ exports.postCart = async (req, res) => {
       return req.user.addToCart(product);
     })
     .then((result) => {
-      // console.log("result form add to cart", result);
+      res.json({ msg: "successfully added to cart" });
     });
+};
+exports.getCart = async (req, res) => {
+  req.user.getCart().then((products) => {
+    res.json({ data: products });
+  });
+};
+
+exports.deleteFromCart = (req, res) => {
+  const prodId = req.body.productId;
+  console.log(prodId);
+  req.user.deleteFromCart(prodId).then((result) => {
+    res.status(200).json({ msg: "successfully removed from cart" });
+  });
 };

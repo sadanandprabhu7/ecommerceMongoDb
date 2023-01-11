@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
-const mongoConnect = require("./util/database").mongoConnect;
+const mongoose = require("mongoose");
 const env = require("dotenv");
 const path = require("path");
 const shopProducts = require("./routes/shop");
@@ -42,6 +42,11 @@ app.use(shopProducts);
 // app.use((req, res) => {
 //   res.sendFile(path.join(__dirname, `public/${req.url}`));
 // });
-mongoConnect(() => {
-  app.listen(3000);
-});
+mongoose
+  .connect(
+    `mongodb+srv://${process.env.MONGO_DBUSERNAME}:${process.env.MONGO_DBPASS}@${process.env.MONGO_DBNAME}.thkr7qn.mongodb.net/ecommerce?retryWrites=true&w=majority`
+  )
+  .then(app.listen(3000))
+  .catch((err) => {
+    console.log(err);
+  });

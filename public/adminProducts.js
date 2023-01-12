@@ -28,7 +28,7 @@ async function deleteProduct(productId) {
 async function editProduct(productId) {
   const res = await axios.get(`http://localhost:3000/productEdit/${productId}`);
   if (res.status === 200) {
-    updateProduct(res.data.data[0]);
+    updateProduct(res.data.data);
   }
 }
 async function updateProduct(product) {
@@ -41,13 +41,11 @@ async function updateProduct(product) {
     const updatedTitle = document.getElementById("pTitle").value;
     const updatedImage = document.getElementById("pImage").value;
     const updatedPrice = document.getElementById("pPrice").value;
-    console.log(product._id);
     if (updatedTitle == "" || updatedImage == "" || updatedPrice == "") {
       return alert("please fill the details");
     }
     const obj = { updatedTitle, updatedImage, updatedPrice, _id: product._id };
     const res = await axios.post(`http://localhost:3000/updateProduct`, obj);
-    console.log(res);
     if (res.status === 200) {
       alert(`${res.data.msg}`);
       document.getElementById("updateProduct").style.visibility = "hidden";

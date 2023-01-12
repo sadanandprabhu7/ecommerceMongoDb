@@ -1,3 +1,29 @@
+const mongoose = require("mongoose");
+
+//NOTES --
+//schems means how you are storing your data into database like
+// there is title which is string and it is not be null means it is required
+// so this how we defined rules for storing data into database which is known as schema
+
+//model is basically a blueprint or structure which define our database that how it store data and how it should be look like
+
+const Schema = mongoose.Schema;
+
+const productSchema = new Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  image: {
+    type: String,
+    required: true,
+  },
+  price: {
+    type: Number,
+    required: true,
+  },
+});
+module.exports = mongoose.model("Product", productSchema);
 // const getDb = require("../util/database").getDb;
 // const mongoDb = require("mongodb");
 

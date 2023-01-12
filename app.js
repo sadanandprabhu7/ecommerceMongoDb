@@ -7,7 +7,6 @@ const env = require("dotenv");
 const path = require("path");
 const shopProducts = require("./routes/shop");
 const adminRoutes = require("./routes/admin");
-
 const User = require("./models/user");
 
 const app = express();
@@ -19,15 +18,9 @@ env.config();
 app.use(bodyParser.json({ extended: false }));
 
 app.use((req, res, next) => {
-  User.findById("63bd845bb5638c1ac9ef7d89")
+  User.findById("63bf5317e3fa48f366a4578e")
     .then((user) => {
-      req.user = new User(
-        user.name,
-        user.email,
-        user.phone,
-        user.cart,
-        user._id
-      );
+      req.user = new User();
       next();
     })
     .catch((err) => {
@@ -46,7 +39,20 @@ mongoose
   .connect(
     `mongodb+srv://${process.env.MONGO_DBUSERNAME}:${process.env.MONGO_DBPASS}@${process.env.MONGO_DBNAME}.thkr7qn.mongodb.net/ecommerce?retryWrites=true&w=majority`
   )
-  .then(app.listen(3000))
+  .then((result) => {
+    User.findOne().then((user) => {
+      if (!user) {
+        const user = new User({
+          name: "sadanand",
+          email: "sada1@gmail.com",
+          cart: { items: [] },
+        });
+        user.save();
+      }
+    });
+
+    app.listen(3000);
+  })
   .catch((err) => {
     console.log(err);
   });

@@ -29,7 +29,7 @@
 const Product = require("../models/product");
 
 exports.shopProducts = async (req, res) => {
-  const products = await Product.fetchAll();
+  const products = await Product.find();
   res.json({ data: products });
 };
 

@@ -3,9 +3,9 @@ const mongoDb = require("mongodb");
 
 exports.addProduct = (req, res) => {
   const { title, image, price } = req.body;
-  const product = new Product(title, image, price, null, req.user._id);
+  const product = new Product({ title: title, image: image, price: price });
   product
-    .save()
+    .save() // here save method we have not define in product model it already given by mongoose
     .then((result) => {
       res.status(200).json({ msg: "product created" });
     })
@@ -15,13 +15,13 @@ exports.addProduct = (req, res) => {
 };
 
 exports.adminProducts = async (req, res) => {
-  const products = await Product.fetchAll();
+  const products = await Product.find();
   res.json({ data: products });
 };
 
 exports.productDelete = async (req, res) => {
   const id = req.params.productId;
-  const result = await Product.delete(id);
+  const result = await Product.findByIdAndRemove(id);
   //console.log(result);
   res.json({ msg: "deleted" });
 };
@@ -35,12 +35,14 @@ exports.productEdit = async (req, res) => {
 
 exports.updateProduct = async (req, res) => {
   const { updatedTitle, updatedImage, updatedPrice, _id } = req.body;
-  const product = new Product(
-    updatedTitle,
-    updatedImage,
-    updatedPrice,
-    new mongoDb.ObjectId(_id)
-  );
-  const result = await product.save();
-  res.json({ data: result, msg: "updated" });
+  Product.findById(_id)
+    .then((product) => {
+      product.title = updatedTitle;
+      product.image = updatedImage;
+      product.price = updatedPrice;
+      return product.save();
+    })
+    .then((result) => {
+      res.json({ data: result, msg: "updated" });
+    });
 };

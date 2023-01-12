@@ -44,8 +44,8 @@ exports.postCart = async (req, res) => {
     });
 };
 exports.getCart = async (req, res) => {
-  req.user.getCart().then((products) => {
-    res.json({ data: products });
+  req.user.populate("cart.items.productId").then((user) => {
+    res.json({ data: user.cart.items });
   });
 };
 

@@ -8,13 +8,13 @@ window.addEventListener("DOMContentLoaded", () => {
       document.getElementById("orderBtn").style.visibility = "hidden";
     }
     res.data.data.forEach((product) => {
-      const itemsDiv = `<div class="shop-item" id="${product._id}">
-                    <span class="shop-item-title">${product.title}</span>
-                    <img class="shop-item-image" src="${product.image}">
+      const itemsDiv = `<div class="shop-item" id="${product.productId._id}">
+                    <span class="shop-item-title">${product.productId.title}</span>
+                    <img class="shop-item-image" src="${product.productId.image}">
                     <div class="shop-item-details">
-                        <span class="shop-item-price">$${product.price}</span>
+                        <span class="shop-item-price">$${product.productId.price}</span>
                         <span class="shop-item-price"> <input id="quantityInput" type="number" value="${product.quantity}" /></span>
-                        <button class="btn btn-danger" onclick="deleteFromCart('${product._id}')" type="button">REMOVE</button>  
+                        <button class="btn btn-danger" onclick="deleteFromCart('${product.productId._id}')" type="button">REMOVE</button>  
                     </div>`;
       parentDiv.innerHTML += itemsDiv;
     });

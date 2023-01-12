@@ -82,7 +82,7 @@ exports.postOrder = (req, res) => {
 };
 
 exports.getOrders = async (req, res) => {
-  req.user.getOrders().then((products) => {
+  Order.find({ "user.userId": req.user._id }).then((products) => {
     res.json({ data: products });
   });
 };

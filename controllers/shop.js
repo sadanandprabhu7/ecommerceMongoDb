@@ -27,6 +27,7 @@
 // };
 
 const Product = require("../models/product");
+const Order = require("../models/order");
 
 exports.shopProducts = async (req, res) => {
   const products = await Product.find();
@@ -57,9 +58,27 @@ exports.deleteFromCart = (req, res) => {
 };
 
 exports.postOrder = (req, res) => {
-  req.user.addOrder().then((result) => {
-    res.status(200).json({ msg: "successfully Placed " });
-  });
+  req.user
+    .populate("cart.items.productId")
+    .then((user) => {
+      const products = user.cart.items.map((i) => {
+        return { quantity: i.quantity, product: { ...i.productId._doc } };
+      });
+      const order = new Order({
+        user: {
+          name: req.user.name,
+          userId: req.user,
+        },
+        products: products,
+      });
+      return order.save();
+    })
+    .then((result) => {
+      return req.user.clearCrat();
+    })
+    .then((result) => {
+      res.status(200).json({ msg: "successfully Placed " });
+    });
 };
 
 exports.getOrders = async (req, res) => {

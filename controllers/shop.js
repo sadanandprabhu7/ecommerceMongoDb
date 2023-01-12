@@ -30,8 +30,6 @@ const Product = require("../models/product");
 
 exports.shopProducts = async (req, res) => {
   const products = await Product.find();
-
-  console.log(products);
   res.json({ data: products });
 };
 
@@ -53,7 +51,6 @@ exports.getCart = async (req, res) => {
 
 exports.deleteFromCart = (req, res) => {
   const prodId = req.body.productId;
-  console.log(prodId);
   req.user.deleteFromCart(prodId).then((result) => {
     res.status(200).json({ msg: "successfully removed from cart" });
   });

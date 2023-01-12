@@ -20,7 +20,7 @@ app.use(bodyParser.json({ extended: false }));
 app.use((req, res, next) => {
   User.findById("63bf5317e3fa48f366a4578e")
     .then((user) => {
-      req.user = new User();
+      req.user = user;
       next();
     })
     .catch((err) => {

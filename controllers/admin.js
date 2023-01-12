@@ -3,7 +3,12 @@ const mongoDb = require("mongodb");
 
 exports.addProduct = (req, res) => {
   const { title, image, price } = req.body;
-  const product = new Product({ title: title, image: image, price: price });
+  const product = new Product({
+    title: title,
+    image: image,
+    price: price,
+    userId: req.user,
+  });
   product
     .save() // here save method we have not define in product model it already given by mongoose
     .then((result) => {

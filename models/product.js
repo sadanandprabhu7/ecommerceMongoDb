@@ -22,6 +22,11 @@ const productSchema = new Schema({
     type: Number,
     required: true,
   },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
 });
 module.exports = mongoose.model("Product", productSchema);
 // const getDb = require("../util/database").getDb;

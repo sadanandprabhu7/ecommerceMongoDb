@@ -1,8 +1,7 @@
 const parentDiv = document.getElementsByClassName("shop-items")[0];
-window.addEventListener("load", () => {
-  axios.get(`http://localhost:3000/products`).then((res) => {
-    showProducts(res.data.data);
-  });
+window.addEventListener("load", async () => {
+  const res = await axios.get(`http://localhost:3000/products`);
+  showProducts(res.data.data);
 });
 
 function showProducts(products) {
@@ -19,15 +18,15 @@ function showProducts(products) {
   });
 }
 
-function addToCart(product) {
-  axios
-    .post("http://localhost:3000/postCart", { productId: product })
-    .then((res) => {
-      if (res.status == 200) {
-        alert(`${res.data.msg}`);
-      }
-    })
-    .catch((err) => {
-      console.log(err);
+async function addToCart(product) {
+  try {
+    const res = await axios.post("http://localhost:3000/postCart", {
+      productId: product,
     });
+    if (res.status == 200) {
+      alert(`${res.data.msg}`);
+    }
+  } catch (e) {
+    console.log(e);
+  }
 }

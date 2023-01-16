@@ -1,88 +1,70 @@
-// const Product = require("../models/product");
-// let ITEMS_PER_PAGE = 2;
-// exports.shopProducts = (req, res, next) => {
-//   const page = +req.query.page || 1;
-//   let totalItems;
-//   Product.count()
-//     .then((total) => {
-//       totalItems = total;
-//       return Product.findAll({
-//         offset: (page - 1) * ITEMS_PER_PAGE,
-//         limit: ITEMS_PER_PAGE,
-//       });
-//     })
-//     .then((products) => {
-//       res.json({
-//         products: products,
-
-//         currentPage: page,
-//         hasNextPage: ITEMS_PER_PAGE * page < totalItems,
-//         hasPriviousPage: page > 1,
-//         nextPage: page + 1,
-//         previosPage: page - 1,
-//         lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE),
-//       });
-//     })
-//     .catch((err) => console.log(err));
-// };
-
 const Product = require("../models/product");
 const Order = require("../models/order");
 
 exports.shopProducts = async (req, res) => {
-  const products = await Product.find();
-  res.json({ data: products });
+  try {
+    const products = await Product.find();
+    res.json({ data: products });
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 exports.postCart = async (req, res) => {
-  const prodId = req.body.productId;
-  Product.findById(prodId)
-    .then((product) => {
-      return req.user.addToCart(product);
-    })
-    .then((result) => {
-      res.json({ msg: "successfully added to cart" });
-    });
+  try {
+    const prodId = req.body.productId;
+    const product = await Product.findById(prodId);
+    await req.user.addToCart(product);
+    res.json({ msg: "successfully added to cart" });
+  } catch (e) {
+    console.log(e);
+  }
 };
 exports.getCart = async (req, res) => {
-  req.user.populate("cart.items.productId").then((user) => {
+  try {
+    const user = await req.user.populate("cart.items.productId");
     res.json({ data: user.cart.items });
-  });
+  } catch (e) {
+    console.log(e);
+  }
 };
 
-exports.deleteFromCart = (req, res) => {
-  const prodId = req.body.productId;
-  req.user.deleteFromCart(prodId).then((result) => {
+exports.deleteFromCart = async (req, res) => {
+  try {
+    const prodId = req.body.productId;
+    const result = await req.user.deleteFromCart(prodId);
     res.status(200).json({ msg: "successfully removed from cart" });
-  });
+  } catch (e) {
+    console.log(e);
+  }
 };
 
-exports.postOrder = (req, res) => {
-  req.user
-    .populate("cart.items.productId")
-    .then((user) => {
-      const products = user.cart.items.map((i) => {
-        return { quantity: i.quantity, product: { ...i.productId._doc } };
-      });
-      const order = new Order({
-        user: {
-          name: req.user.name,
-          userId: req.user,
-        },
-        products: products,
-      });
-      return order.save();
-    })
-    .then((result) => {
-      return req.user.clearCrat();
-    })
-    .then((result) => {
-      res.status(200).json({ msg: "successfully Placed " });
+exports.postOrder = async (req, res) => {
+  try {
+    const user = await req.user.populate("cart.items.productId");
+    const products = user.cart.items.map((i) => {
+      return { quantity: i.quantity, product: { ...i.productId._doc } };
     });
+    const order = new Order({
+      user: {
+        name: req.user.name,
+        userId: req.user,
+      },
+      products: products,
+    });
+    order.save();
+    req.user.clearCrat();
+    res.status(200).json({ msg: "successfully Placed " });
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 exports.getOrders = async (req, res) => {
-  Order.find({ "user.userId": req.user._id }).then((products) => {
+  try {
+    const products = await Order.find({ "user.userId": req.user._id });
     res.json({ data: products });
-  });
+  } catch (e) {
+    console.log(e);
+  }
 };

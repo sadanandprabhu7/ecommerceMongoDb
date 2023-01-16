@@ -1,11 +1,10 @@
-window.addEventListener("DOMContentLoaded", () => {
-  axios
-    .get("http://localhost:3000/getOrders")
-    .then((res) => {
-      res.data.data.forEach((order) => {
-        order.products.forEach((p) => {
-          const parent = document.getElementById("mytable");
-          const newItem = `<tr>
+window.addEventListener("DOMContentLoaded", async () => {
+  try {
+    const res = await axios.get("http://localhost:3000/getOrders");
+    res.data.data.forEach((order) => {
+      order.products.forEach((p) => {
+        const parent = document.getElementById("mytable");
+        const newItem = `<tr>
             <td>
               <img
                 class="cart-item-image"
@@ -23,9 +22,10 @@ window.addEventListener("DOMContentLoaded", () => {
               <label>${order._id}</label>S
             </td>
           </tr>`;
-          parent.innerHTML += newItem;
-        });
+        parent.innerHTML += newItem;
       });
-    })
-    .catch((err) => console.log(err));
+    });
+  } catch (e) {
+    console.log(e);
+  }
 });
